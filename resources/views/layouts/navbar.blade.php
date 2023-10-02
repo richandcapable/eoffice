@@ -8,7 +8,7 @@
     <!-- Topbar Search -->
     <div class="navbar">
         <div class="navbar-left">
-            <span>Visi Misi</span>
+            <span><b>Visi Misi</b></span>
         </div>
         
     </div>
@@ -45,7 +45,7 @@
         <li class="nav-item dropdown no-arrow mx-1">
             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i>Visi Misi</i>
+                <i>Dashboard</i>
                 <!-- Counter - Alerts -->
               
             </a>
@@ -95,9 +95,9 @@
 
         <!-- Nav Item - Messages -->
         <li class="nav-item">
-            <a class="nav-link" href="dashboard.html" style="color: blue;">
+            <a class="nav-link" href="visimisi" style="color: blue;">
                 <i></i>
-                Dashboard
+                Visi Misi
             </a>
         </li>
         

@@ -17,10 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route:: get('dashboard',function(){
-  return view('dashboard');
+Route:: get('visimisi',function(){
+    return view('layouts.visimisi');
 });
 
-Route:: get('layouts.app',function(){
-  return view('layouts.app');
+Route:: get('sasaran',function(){
+    return view('layouts.sasaran');
 });
