@@ -34,7 +34,7 @@
                                     <tr>
                                         <td>
                                             <b>VISI 
-                                                <button id="editVisiBtn" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm rounded-pill float-right" data-toggle="modal" data-target="#editVisiModal">Edit Visi</button>
+                                                    <button id="editVisiBtn" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm rounded-pill float-right" data-toggle="modal" data-target="#editVisiModal">Edit Visi</button>
                                             </b>
                                             <div class="modal fade" id="editVisiModal" tabindex="-1" role="dialog" aria-labelledby="editVisiModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
@@ -47,17 +47,32 @@
                                                         </div>
                                                         <div class="modal-body">
                                                             <!-- Isi form untuk mengubah visi -->
-                                                            <form>
+                                                            <form action="/visimisi-update/1" method="POST" enctype="multipart/form-data">
+                                                                @method('PUT')
+                                                                @csrf
                                                                 <div class="form-group">
                                                                     <label for="newVisi">Visi Baru</label>
-                                                                    <input type="text" class="form-control" id="newVisi" placeholder="Masukkan visi baru">
+                                                                    <input type="text" class="form-control" name="visi" placeholder="Masukkan visi baru">
                                                                 </div>
-                                                            </form>
+                                                                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                                            </form>                                                           
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                                                            <button type="button" class="btn btn-primary">Simpan Perubahan</button>
                                                         </div>
+                                                        <script>
+                                                            //message with toastr
+                                                            @if(session()->has('success'))
+                                                            
+                                                                toastr.success('{{ session('success') }}', 'BERHASIL!'); 
+                                                    
+                                                            @elseif(session()->has('error'))
+                                                    
+                                                                toastr.error('{{ session('error') }}', 'GAGAL!'); 
+                                                                
+                                                            @endif
+                                                        </script>
+                                                    
                                                     </div>
                                                 </div>
                                             </div>  
@@ -65,14 +80,25 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            Visi Anda akan ditempatkan di sini. Misalnya:
-                                            <p>Menjadi pemimpin dalam inovasi teknologi dan memberikan solusi terbaik kepada pelanggan.</p>
+
+                                            @foreach ($visis as $item)
+                                                {{ $item->visi }}
+                                            @endforeach
+                                            <!-- Menampilkan visi dari database -->
+
+                                            {{-- @if(!empty($visis))
+                                                <p>{{ $visis->visi}}</p>
+                                            @else
+                                                <p>Belum ada visi yang ditetapkan.</p>
+                                            @endif --}}
                                         </td>
                                     </tr>
                                 </table>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
 
                     <div class="container mt-4">
                         <div class="row">
@@ -95,14 +121,36 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+                                                        @foreach ($misi as $data)
+                                                        @php($no=1)
                                                         <tr>
-                                                            <td>1</td>
-                                                            <td>Vincent Williamson</td>
+                                                            <td>{{$loop->iteration}}</td>
+                                                            <td>{{ $data->misi }}</td>
                                                             <td>
-                                                                <a href="#" data-tip="edit" class="text-warning"><i class="fas fa-edit"></i></a>
+                                                                <a data-tip="editMisi" class="text-warning" data-toggle="modal" data-target="#editMisiModal"><i class="fas fa-edit"></i></a>
                                                                 <a href="#" data-tip="delete" class="text-danger"><i class="fas fa-trash"></i></a>
                                                             </td>
                                                         </tr>
+                                                        @endforeach 
+                                                        <div class="modal fade" id="editMisiModal" tabindex="-1" role="dialog" aria-labelledby="editMisiModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-body">
+                                                                    <script>
+                                                                        //message with toastr
+                                                                        @if(session()->has('success'))
+                                                                        
+                                                                            toastr.success('{{ session('success') }}', 'BERHASIL!'); 
+                                                                
+                                                                        @elseif(session()->has('error'))
+                                                                
+                                                                            toastr.error('{{ session('error') }}', 'GAGAL!'); 
+                                                                            
+                                                                        @endif
+                                                                    </script>
+                                                                </div>
+                                                            </div>
+                                                        </div>  
                                                         <!-- Tambahkan baris Misi lainnya sesuai kebutuhan -->
                                                     </tbody>
                                                 </table>
@@ -120,17 +168,19 @@
                                                             </div>
                                                             <div class="modal-body">
                                                                 <!-- Isi form untuk menambahkan misi -->
-                                                                <form>
+                                                                <form action="/misi-store" method="POST">
+                                                                    @csrf
                                                                     <div class="form-group">
                                                                         <label for="namaMisi">Nama Misi</label>
-                                                                        <input type="text" class="form-control" id="namaMisi" placeholder="Masukkan nama misi">
+                                                                        <input type="text" class="form-control" name="misi" placeholder="Masukkan nama misi">
+                                                                    </div>
+
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                                        <button type="button" class="btn btn-primary">Simpan Misi</button>
                                                                     </div>
                                                                 </form>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                                                                <button type="button" class="btn btn-primary">Simpan Misi</button>
-                                                            </div>
+                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -171,8 +221,39 @@
                                         <tr>
                                             <td>
                                                 <div class="text-left">
-                                                    <button class="btn btn-outline-primary" style="margin-top: 10px;"><i class="fas fa-plus"></i> Tambah Tujuan Misi 1</button>
+                                                    <button class="btn btn-outline-primary" style="margin-top: 10px;" data-toggle="modal" data-target="#tambahTujuanModal">
+                                                        <i class="fas fa-plus"></i> Tambah Tujuan Misi 1
+                                                    </button>
                                                 </div>
+                                                
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="tambahTujuanModal" tabindex="-1" role="dialog" aria-labelledby="tambahTujuanModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="tambahTujuanModalLabel">Tambah Tujuan</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="form-group">
+                                                                    <label for="misi">Misi</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="form-group">
+                                                                    <label for="Tujuan">Misi dan Tujuan:</label>
+                                                                    <textarea class="form-control" id="misiTujuan" rows="4" placeholder="Masukkan Tujuan"></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                                <button type="button" class="btn btn-primary">Simpan</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>                                                
                                             </td>
                                         </tr>
                                         <tr>
@@ -216,8 +297,152 @@
                                                     </table>
                                                 </div>
                                                 <div class="text-right">
-                                                    <button class="btn btn-outline-primary" style="margin-top: 10px;"><i class="fas fa-plus"></i> Tambah Indikator</button>
+                                                    <button class="btn btn-outline-primary" style="margin-top: 10px;" data-toggle="modal" data-target="#tambahIndikatorModal">
+                                                        <i class="fas fa-plus"></i> Tambah Indikator
+                                                    </button>
                                                 </div>
+                                                
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="tambahIndikatorModal" tabindex="-1" role="dialog" aria-labelledby="tambahIndikatorModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="tambahIndikatorModalLabel">Tambah Indikator</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="form-group">
+                                                                    <label for="misiTujuan">Misi dan Tujuan:</label>
+                                                                    <textarea class="form-control" id="misiTujuan" rows="4" placeholder="Masukkan Misi dan Tujuan di sini"></textarea>
+                                                                </div>
+                                                
+                                                                <div class="form-group">
+                                                                    <label for="indikator">Indikator:</label>
+                                                                    <textarea class="form-control" id="indikator" rows="4" placeholder="Masukkan Indikator di sini"></textarea>
+                                                                </div>
+                                                
+                                                                <div class="form-group">
+                                                                    <label for="satuanPengukuran">Satuan Pengukuran:</label>
+                                                                    <select class="form-control" id="satuanPengukuran">
+                                                                        <option value="option1">Option 1</option>
+                                                                        <option value="option2">Option 2</option>
+                                                                        <!-- Tambahkan pilihan satuan pengukuran lainnya di sini -->
+                                                                    </select>
+                                                                </div>
+                                                                <div class="container">
+                                                                    <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            <table class="table table-lg table-bordered">
+                                                                                <thead class="bg-secondary text-black">
+                                                                                    <tr class="bg-light">
+                                                                                        <th>Target Kondisi Awal</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td><input type="text" class="form-control" placeholder="Masukkan Target Kondisi Awal"></td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <table class="table table-lg table-bordered">
+                                                                                <thead class="bg-secondary text-black">
+                                                                                    <tr class="bg-light">
+                                                                                        <th>Target Tahun 2021</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td><input type="text" class="form-control" placeholder="Masukkan Target 2021"></td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <table class="table table-lg table-bordered">
+                                                                                <thead class="bg-secondary text-black">
+                                                                                    <tr class="bg-light">
+                                                                                        <th>Target Tahun 2022</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td><input type="text" class="form-control" placeholder="Masukkan Target 2022"></td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <table class="table table-lg table-bordered">
+                                                                                <thead class="bg-secondary text-black">
+                                                                                    <tr class="bg-light">
+                                                                                        <th>Target Tahun 2023</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td><input type="text" class="form-control" placeholder="Masukkan Target 2023"></td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <table class="table table-lg table-bordered">
+                                                                                <thead class="bg-secondary text-black">
+                                                                                    <tr class="bg-light">
+                                                                                        <th>Target Tahun 2024</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td><input type="text" class="form-control" placeholder="Masukkan Target 2024"></td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <table class="table table-lg table-bordered">
+                                                                                <thead class="bg-secondary text-black">
+                                                                                    <tr class="bg-light">
+                                                                                        <th>Target 2025</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td><input type="text" class="form-control" placeholder="Masukkan Target 2025"></td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <table class="table table-lg table-bordered">
+                                                                                <thead class="bg-secondary text-black">
+                                                                                    <tr class="bg-light">
+                                                                                        <th>Target Kondisi Akhir</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td><input type="text" class="form-control" placeholder="Masukkan Target Akhir"></td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                                                                              
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                                <button type="button" class="btn btn-primary">Simpan</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
                                             </td>
                                         </tr>
 
