@@ -29,7 +29,7 @@
             <!-- Main Content -->
             <div id="content">
                 <!-- Topbar -->
-                @include('layouts.navbar')
+                @include('layouts.navbarsasaran')
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
@@ -41,10 +41,60 @@
                                     <tr>
                                         <td>
                                             <div class="text-center">
-                                                <button class="btn btn-primary btn-block">
-                                                    <i class="fa fa-plus"></i> Tambah Sasaran
-                                                </button>                                                
+                                                <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#tambahSasaran">
+                                                    <i class="fa fa-plus"></i>Tambah Sasaran
+                                                </button>
                                             </div>
+                                            <div class="modal fade" id="tambahSasaran" tabindex="-1" role="dialog" aria-labelledby="tambahSasaranModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="tambahSasaranModalLabel">Tambah Sasaran</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <!-- Isi form untuk menambah sasaran -->
+                                                            <form action="/sasaran-store" method="POST" enctype="multipart/form-data">
+                                                                @csrf
+                                                                <div class="form-group">
+                                                                    <label for="misi">Misi</label>
+                                                                    <select class="form-control" name="kode">
+                                                                        <option value="misi1">Misi 1</option>
+                                                                        <option value="misi2">Misi 2</option>
+                                                                        <!-- Tambahkan pilihan misi sesuai kebutuhan -->
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="tujuan">Tujuan</label>
+                                                                    <select class="form-control" name="tujuan">
+                                                                        <option value="tujuan1">Tujuan 1</option>
+                                                                        <option value="tujuan2">Tujuan 2</option>
+                                                                        <!-- Tambahkan pilihan tujuan sesuai kebutuhan -->
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="indikatorTujuan">Indikator Tujuan</label>
+                                                                    <select class="form-control" name="indikatorTujuan">
+                                                                        <option value="indikator1">Indikator 1</option>
+                                                                        <option value="indikator2">Indikator 2</option>
+                                                                        <!-- Tambahkan pilihan indikator tujuan sesuai kebutuhan -->
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="namaSasaran">Nama Sasaran</label>
+                                                                    <textarea class="form-control" rows="4" placeholder="Masukkan nama sasaran" name="nama_sasaran"></textarea>
+                                                                </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                                            <button type="submit" class="btn btn-primary">Simpan Sasaran</button>
+                                                        </div>
+                                                    </form>
+                                                    </div>
+                                                </div>
+                                            </div>                                                                                      
                                         </td>
                                         <td>
                                             <div id="visiContent">
@@ -87,24 +137,16 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    @foreach($sasaran as $item)
                                                     <tr>
-                                                        <th scope="row">1</th>
-                                                        <td>Mark</td>
-                                                        <td>Otto</td>
+                                                        <td>{{$loop->iteration}}</td>
+                                                        <td>{{ $item->kode }}</td>
+                                                        <td>{{ $item->nama_sasaran }}</td>                                                  
                                                         <td>
                                                             <button class="btn btn-primary btn-sm">
                                                                 <i class="far fa-eye"></i> Detail
                                                             </button>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">2</th>
-                                                        <td>Jacob</td>
-                                                        <td>Thornton</td>
-                                                        <td>
-                                                            <button class="btn btn-primary btn-sm">
-                                                                <i class="far fa-eye"></i> Detail
-                                                            </button>
+                                                            @endforeach
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -126,24 +168,6 @@
         </div>
         <!-- End of Content Wrapper -->
     </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Bootstrap core JavaScript -->
-    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-
-    <!-- Core plugin JavaScript -->
-    <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
-
-    <!-- Custom scripts for all pages -->
-    <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
-
-    <!-- Page level plugins -->
-    <script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
+    
 </body>
 </html>

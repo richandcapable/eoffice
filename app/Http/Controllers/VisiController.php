@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Visi;
 use App\Models\Misi;
+use App\Models\Indikator;
+use App\Models\Tujuan;
 use Illuminate\Http\Request;
 
 class VisiController extends Controller
@@ -18,17 +20,21 @@ class VisiController extends Controller
         //get visis
         $visis = Visi::all()->where('id','1');
         $misi = Misi::all();
-        return view('layouts/visimisi',compact('visis','misi'));
+        $indikator = Indikator::all();
+        $tujuan = Tujuan::all();
+        return view('layouts/visimisi',compact('visis','misi','indikator','tujuan'));
         //render view with visis
         // return view('layouts.visimisi', compact('visis'));
     }
+
+    
     
     /**
      * create
      *
      * @return void
      */
-    public function create()
+    public function show()
     {
         return view('layouts.visimisi');
     }

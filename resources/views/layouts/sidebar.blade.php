@@ -5,8 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Page Title</title>
 
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Tautan Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Tautan Bootstrap JS (Popper.js diperlukan untuk dropdown) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
     <!-- Custom CSS -->
     <style>
         /* Sidebar styling */
@@ -40,7 +51,7 @@
     <div id="wrapper">
         <ul class="navbar-nav bg-white sidebar sidebar-dark accordion" id="accordionSidebar">
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="visimisi">
                 <div class="sidebar-brand-icon">
                     <img src="img/Banjarbaru.png" width="50" height="60">
                 </div>
@@ -63,7 +74,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading text-gray-600">
-                -- SICERDAS
+                --SICERDAS
             </div>
 
             <!-- Nav Item - RPJMD -->
@@ -71,7 +82,7 @@
                 <a class="nav-link collapsed" href="#s" data-toggle="collapse" data-target="#collapseTwo"
                 aria-expanded="true" aria-controls="collapseTwo">
                  <i class="fas fa-fw fa-cog"></i>
-                 <span class="text-gray-600">RPJMD <i class="fas fa-chevron-down text-primary"></i></span>
+                 <span class="text-gray-600">RPJMD<i class="fas fa-chevron-down text-primary"></i></span>
                 </a>     
                
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -88,25 +99,8 @@
     </div>
 
     <!-- Bootstrap JavaScript and jQuery (Add these scripts at the end of your body tag) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     
 
-    <!-- JavaScript to Toggle Sidebar -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const sidebarToggle = document.getElementById("sidebarToggle");
-            const wrapper = document.getElementById("wrapper");
-
-            sidebarToggle.addEventListener("click", function () {
-                if (wrapper.classList.contains("toggled")) {
-                    wrapper.classList.remove("toggled");
-                } else {
-                    wrapper.classList.add("toggled");
-                }
-            });
-        }); 
-    </script>
+    
 </body>
 </html>
