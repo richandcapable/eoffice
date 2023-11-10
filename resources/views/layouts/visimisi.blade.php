@@ -374,14 +374,14 @@
                                                             <tr>
                                                                 <td>{{$loop->iteration}}</td>
                                                                 <td>{{ $item->indikator }}</td>
-                                                                <td>{{ $item->satuan_pengukuran }}</td>
                                                                 <td>{{ $item->target_kondisi_awal }}</td>
                                                                 <td>{{ $item->target_tahun_2021 }}</td>
-                                                                <td>{{ $item->target_tahun_2022 }}</td>
+                                                                <td>{{ $item->target_tahun_2023 }}</td>
                                                                 <td>{{ $item->target_tahun_2023 }}</td>
                                                                 <td>{{ $item->target_tahun_2024 }}</td>
                                                                 <td>{{ $item->target_tahun_2025 }}</td>
                                                                 <td>{{ $item->target_kondisi_akhir }}</td>
+                                                                <td>{{ $item->satuan_pengukuran }}</td>
                                                                 <td>
                                                                     <a data-tip="editIndikator" href="/indikator-update/{{ $item->id }}" class="text-warning" data-toggle="modal" data-target="#editIndikatorModal"><i class="fas fa-edit"></i></a>
                                                                     <div class="modal fade" id="editIndikatorModal" tabindex="-1" role="dialog" aria-labelledby="editIndikatorModalLabel" aria-hidden="true">
@@ -460,7 +460,7 @@
                                                                                                     </thead>
                                                                                                     <tbody>
                                                                                                         <tr>
-                                                                                                            <td><input type="text" class="form-control" placeholder="Masukkan Target Kondisi Awal"></td>
+                                                                                                            <td><input type="text" class="form-control" placeholder="Masukkan Target Kondisi Awal" name="target_kondisi_awal"></td>
                                                                                                         </tr>
                                                                                                     </tbody>
                                                                                                 </table>
@@ -474,7 +474,7 @@
                                                                                                     </thead>
                                                                                                     <tbody>
                                                                                                         <tr>
-                                                                                                            <td><input type="text" class="form-control" placeholder="Masukkan Target 2021"></td>
+                                                                                                            <td><input type="text" class="form-control" placeholder="Masukkan Target 2021" name="target_tahun_2021"></td>
                                                                                                         </tr>
                                                                                                     </tbody>
                                                                                                 </table>
@@ -488,7 +488,7 @@
                                                                                                     </thead>
                                                                                                     <tbody>
                                                                                                         <tr>
-                                                                                                            <td><input type="text" class="form-control" placeholder="Masukkan Target 2022"></td>
+                                                                                                            <td><input type="text" class="form-control" placeholder="Masukkan Target 2022" name="target_tahun_2022"></td>
                                                                                                         </tr>
                                                                                                     </tbody>
                                                                                                 </table>
@@ -502,7 +502,7 @@
                                                                                                     </thead>
                                                                                                     <tbody>
                                                                                                         <tr>
-                                                                                                            <td><input type="text" class="form-control" placeholder="Masukkan Target 2023"></td>
+                                                                                                            <td><input type="text" class="form-control" placeholder="Masukkan Target 2023" name="target_tahun_2023"></td>
                                                                                                         </tr>
                                                                                                     </tbody>
                                                                                                 </table>
@@ -516,7 +516,7 @@
                                                                                                     </thead>
                                                                                                     <tbody>
                                                                                                         <tr>
-                                                                                                            <td><input type="text" class="form-control" placeholder="Masukkan Target 2024"></td>
+                                                                                                            <td><input type="text" class="form-control" placeholder="Masukkan Target 2024" name="target_tahun_2024"></td>
                                                                                                         </tr>
                                                                                                     </tbody>
                                                                                                 </table>
@@ -530,7 +530,7 @@
                                                                                                     </thead>
                                                                                                     <tbody>
                                                                                                         <tr>
-                                                                                                            <td><input type="text" class="form-control" placeholder="Masukkan Target 2025"></td>
+                                                                                                            <td><input type="text" class="form-control" placeholder="Masukkan Target 2025" name="target_tahun_2025"></td>
                                                                                                         </tr>
                                                                                                     </tbody>
                                                                                                 </table>
@@ -544,7 +544,7 @@
                                                                                                     </thead>
                                                                                                     <tbody>
                                                                                                         <tr>
-                                                                                                            <td><input type="text" class="form-control" placeholder="Masukkan Target Akhir"></td>
+                                                                                                            <td><input type="text" class="form-control" placeholder="Masukkan Target Akhir" name="target_kondisi_akhir"></td>
                                                                                                         </tr>
                                                                                                     </tbody>
                                                                                                 </table>

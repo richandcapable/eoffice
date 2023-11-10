@@ -87,8 +87,8 @@
                                         </button>
                                         <p class="ml-3 text-center"><b>Nama Sasaran :</b> Sasaran Misi</p> 
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" data-tip="editTujuan" data-toggle="modal" data-target="#editTujuan">Edit</a>
-                                            <a class="dropdown-item" data-tip="hapusTujuan" data-toggle="modal" data-target="#hapusTujuan">Hapus</a>
+                                            <a class="dropdown-item" data-tip="editIndikator" data-toggle="modal" data-target="#editIndikator">Edit</a>
+                                            <a class="dropdown-item" data-tip="hapusIndikator" data-toggle="modal" data-target="#hapusIndikator">Hapus</a>
                                         </div>
                                     </div>
                                         </td>
@@ -124,67 +124,475 @@
                                 </tbody>
                             </table>
                             <div class="text-right">
-                                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Kembali</button>
+                                <style>
+                                    .btn-outline-primary {
+                                        background-color: rgb(8,164,196);
+                                        color: white;
+                                    }
+                                </style>
+                                <button type="button" class="btn btn-outline-secondary" onclick="kembaliKeHalamanSasaran()">Kembali</button>
                                 <button class="btn btn-outline-primary" data-toggle="modal" data-target="#tambahIndikatorModal"><i class="fas fa-plus"></i> Tambah Indikator</button>
                             </div>
+                            
+                            <script>
+                                function kembaliKeHalamanSasaran() {
+                                    window.location.href = "sasaran";
+                                }
+                            </script>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Modal Edit Indikator -->
-                <div class="modal fade" id="editIndikatorModal" tabindex="-1" role="dialog" aria-labelledby="editIndikatorModalLabel" aria-hidden="true">
+                <!-- Modal Tambah Indikator -->
+                <div class="modal fade" id="tambahIndikatorModal" tabindex="-1" role="dialog" aria-labelledby="tambahIndikatorModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="editIndikatorModalLabel">Ubah Indikator</h5>
+                                <style>
+                                    .modal-header {
+                                        background-color: rgb(8,164,196);
+                                        color: white; /* Untuk mengubah warna teks menjadi putih atau sesuai kebutuhan */
+                                    }
+                                </style>
+                                <h5 class="modal-title" id="tambahIndikatorModalLabel">Tambah Indikator</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form action="/indikator-update" method="POST">
-                                    @method('PUT')
-                                    @csrf
-                                    <div class="form-group">
-                                        <label for="indikator">Indikator:</label>
-                                        <textarea class="form-control" name="indikator" rows="4" placeholder="Masukkan Indikator di sini"></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="satuanPengukuran">Satuan Pengukuran:</label>
-                                        <select class="form-control" name="satuan_pengukuran">
-                                            <option selected="selected" disabled="true">Pilih Satuan Pengukuran</option>
-                                            <option value="Lokasi">Lokasi</option>
-                                            <!-- Tambahkan pilihan satuan pengukuran lainnya di sini -->
-                                        </select>
-                                    </div>
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <table class="table table-lg table-bordered">
-                                                    <thead class="bg-secondary text-black">
-                                                        <tr class="bg-light">
-                                                            <th>Target Kondisi Awal</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td><input type="text" class="form-control" placeholder="Masukkan Target Kondisi Awal"></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                            <!-- Tambahkan kolom target lainnya sesuai kebutuhan -->
+                                <form action="/indikator-store" method="POST">
+                                    @csrf                       
+                                        <div class="form-group">
+                                            <label for="indikator"><b>Nama Indikator</b></label>
+                                            <textarea class="form-control" name="indikator" rows="1" placeholder="Masukkan nama Indikator"></textarea>
                                         </div>
+                        
+                                        <div class="form-group">
+                                            <label for="satuanPengukuran"><b>Satuan Pengukuran<b></label>
+                                            <select class="form-control" name="satuan_pengukuran">
+                                                <option selected="selected" disabled="true">Pilih Satuan Pengukuran</option>
+                                                <option value="Lokasi">Lokasi</option>
+                                                <option value="kegiatan">Kegiatan</option>
+                                                <option value="Titik">Titik</option>
+                                                <option value="Sasaran">Sasaran</option>
+                                                <option value="SR">SR</option>
+                                                <option value="Kali">Kali</option>
+                                                <option value="minggu sekali dalam setahun">minggu sekali dalam setahun</option>
+                                                <option value="Forum/Kampung">Forum/Kampung</option>
+                                                <option value="Kelompok">Kelompok</option>
+                                                <option value="Orang">Orang</option>
+                                                <option value="KK">KK</option>
+                                                <option value="Hektar">Hektar</option>
+                                                <option value="Unit">Unit</option>
+                                                <option value="Ha">Ha</option>
+                                                <option value="m3/detik">m3/detik</option>
+                                                <option value="KM">KM</option>
+                                                <option value="Kecamatan">Kecamatan</option>
+                                                <option value="Route">Route</option>
+                                                <option value="Paket">Paket</option>
+                                                <option value="Organisasi">Organisasi</option>
+                                                <option value="Sekolah/Pesantren">Sekolah/Pesantren</option>
+                                                <option value="Sekolah">Sekolah</option>
+                                                <option value="Siswa/guru">Siswa/guru</option>
+                                                <option value="Siswa">Siswa</option>
+                                                <option value="Peserta">Peserta</option>
+                                                <option value="Penyuluh">Penyuluh</option>
+                                                <option value="Tokoh">Tokoh</option>
+                                                <option value="Responden">Responden</option>
+                                                <option value="Bulan">Bulan</option>
+                                                <option value="Minggu">Minggu</option>
+                                                <option value="Hari">Hari</option>
+                                                <option value="%">%</option>
+                                                <!-- Tambahkan pilihan satuan pengukuran lainnya di sini -->
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <table class="table table-lg table-bordered">
+                                                        <thead class="bg-secondary text-black">
+                                                            <style>
+                                                                .text-center {
+                                                                    text-align: center;
+                                                                }
+                                                            </style>
+                                                            <tr class="bg-light">
+                                                                <th class="text-center">Target Kondisi Awal</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                            <td><input type="text" class="form-control" placeholder="Masukkan Target Kondisi Awal" name="target_kondisi_awal"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <table class="table table-lg table-bordered">
+                                                        <thead class="bg-secondary text-black">
+                                                            <style>
+                                                                .text-center {
+                                                                    text-align: center;
+                                                                }
+                                                            </style>
+                                                            <tr class="bg-light">
+                                                                <th class="text-center">Target Tahun 2021</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><input type="text" class="form-control" placeholder="Masukkan Target 2021" name="target_tahun_2021"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <table class="table table-lg table-bordered">
+                                                        <thead class="bg-secondary text-black">
+                                                            <style>
+                                                                .text-center {
+                                                                    text-align: center;
+                                                                }
+                                                            </style>
+                                                            <tr class="bg-light">
+                                                                <th class="text-center">Target Tahun 2022</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><input type="text" class="form-control" placeholder="Masukkan Target 2022" name="target_tahun_2022"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <table class="table table-lg table-bordered">
+                                                        <thead class="bg-secondary text-black">
+                                                            <style>
+                                                                .text-center {
+                                                                    text-align: center;
+                                                                }
+                                                            </style>
+                                                            <tr class="bg-light">
+                                                                <th class="text-center">Target Tahun 2023</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><input type="text" class="form-control" placeholder="Masukkan Target 2023" name="target_tahun_2023"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <table class="table table-lg table-bordered">
+                                                        <thead class="bg-secondary text-black">
+                                                            <style>
+                                                                .text-center {
+                                                                    text-align: center;
+                                                                }
+                                                            </style>
+                                                            <tr class="bg-light">
+                                                                <th class="text-center">Target Tahun 2024</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><input type="text" class="form-control" placeholder="Masukkan Target 2024" name="target_tahun_2024"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <table class="table table-lg table-bordered">
+                                                        <thead class="bg-secondary text-black">
+                                                            <style>
+                                                                .text-center {
+                                                                    text-align: center;
+                                                                }
+                                                            </style>
+                                                            <tr class="bg-light">
+                                                                <th class="text-center">Kondisi Akhir</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><input type="text" class="form-control" placeholder="Masukkan Target 2025" name="target_tahun_2025"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <table class="table table-lg table-bordered">
+                                                        <thead class="bg-secondary text-black">
+                                                            <style>
+                                                                .text-center {
+                                                                    text-align: center;
+                                                                }
+                                                            </style>
+                                                            <tr class="bg-light">
+                                                                <th class="text-center">Kondisi Akhir</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><input type="text" class="form-control" placeholder="Masukkan Target Akhir" name="target_kondisi_akhir"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>                                                             
                                     </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </form>
+                </td>
+            </tr>
+                <!-- Modal Edit Indikator -->
+                <div class="modal fade" id="editIndikator" tabindex="-1" role="dialog" aria-labelledby="editIndikatorModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <style>
+                                    .modal-header {
+                                        background-color: rgb(8,164,196);
+                                        color: white; /* Untuk mengubah warna teks menjadi putih atau sesuai kebutuhan */
+                                    }
+                                </style>
+                                <h5 class="modal-title" id="editIndikatorModal">Edit Indikator</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="/indikator-store" method="POST">
+                                    @csrf                       
+                                        <div class="form-group">
+                                            <label for="indikator"><b>Nama Indikator</b></label>
+                                            <textarea class="form-control" name="indikator" rows="1" placeholder="Masukkan nama Indikator"></textarea>
+                                        </div>
+                        
+                                        <div class="form-group">
+                                            <label for="satuanPengukuran"><b>Satuan Pengukuran</b></label>
+                                            <select class="form-control" name="satuan_pengukuran">
+                                                <option selected="selected" disabled="true">Pilih Satuan Pengukuran</option>
+                                                <option value="Lokasi">Lokasi</option>
+                                                <option value="kegiatan">Kegiatan</option>
+                                                <option value="Titik">Titik</option>
+                                                <option value="Sasaran">Sasaran</option>
+                                                <option value="SR">SR</option>
+                                                <option value="Kali">Kali</option>
+                                                <option value="minggu sekali dalam setahun">minggu sekali dalam setahun</option>
+                                                <option value="Forum/Kampung">Forum/Kampung</option>
+                                                <option value="Kelompok">Kelompok</option>
+                                                <option value="Orang">Orang</option>
+                                                <option value="KK">KK</option>
+                                                <option value="Hektar">Hektar</option>
+                                                <option value="Unit">Unit</option>
+                                                <option value="Ha">Ha</option>
+                                                <option value="m3/detik">m3/detik</option>
+                                                <option value="KM">KM</option>
+                                                <option value="Kecamatan">Kecamatan</option>
+                                                <option value="Route">Route</option>
+                                                <option value="Paket">Paket</option>
+                                                <option value="Organisasi">Organisasi</option>
+                                                <option value="Sekolah/Pesantren">Sekolah/Pesantren</option>
+                                                <option value="Sekolah">Sekolah</option>
+                                                <option value="Siswa/guru">Siswa/guru</option>
+                                                <option value="Siswa">Siswa</option>
+                                                <option value="Peserta">Peserta</option>
+                                                <option value="Penyuluh">Penyuluh</option>
+                                                <option value="Tokoh">Tokoh</option>
+                                                <option value="Responden">Responden</option>
+                                                <option value="Bulan">Bulan</option>
+                                                <option value="Minggu">Minggu</option>
+                                                <option value="Hari">Hari</option>
+                                                <option value="%">%</option>
+                                                <!-- Tambahkan pilihan satuan pengukuran lainnya di sini -->
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <table class="table table-lg table-bordered">
+                                                        <thead class="bg-secondary text-black">
+                                                            <style>
+                                                                .text-center {
+                                                                    text-align: center;
+                                                                }
+                                                            </style>
+                                                            <tr class="bg-light">
+                                                                <th class="text-center">Target Kondisi Awal</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                            <td><input type="text" class="form-control" placeholder="Masukkan Target Kondisi Awal" name="target_kondisi_awal"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <table class="table table-lg table-bordered">
+                                                        <thead class="bg-secondary text-black">
+                                                            <style>
+                                                                .text-center {
+                                                                    text-align: center;
+                                                                }
+                                                            </style>
+                                                            <tr class="bg-light">
+                                                                <th class="text-center">Target Tahun 2021</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><input type="text" class="form-control" placeholder="Masukkan Target 2021" name="target_tahun_2021"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <table class="table table-lg table-bordered">
+                                                        <thead class="bg-secondary text-black">
+                                                            <style>
+                                                                .text-center {
+                                                                    text-align: center;
+                                                                }
+                                                            </style>
+                                                            <tr class="bg-light">
+                                                                <th class="text-center">Target Tahun 2022</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><input type="text" class="form-control" placeholder="Masukkan Target 2022" name="target_tahun_2022"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <table class="table table-lg table-bordered">
+                                                        <thead class="bg-secondary text-black">
+                                                            <style>
+                                                                .text-center {
+                                                                    text-align: center;
+                                                                }
+                                                            </style>
+                                                            <tr class="bg-light">
+                                                                <th class="text-center">Target Tahun 2023</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><input type="text" class="form-control" placeholder="Masukkan Target 2023" name="target_tahun_2023"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <table class="table table-lg table-bordered">
+                                                        <thead class="bg-secondary text-black">
+                                                            <style>
+                                                                .text-center {
+                                                                    text-align: center;
+                                                                }
+                                                            </style>
+                                                            <tr class="bg-light">
+                                                                <th class="text-center">Target Tahun 2024</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><input type="text" class="form-control" placeholder="Masukkan Target 2024" name="target_tahun_2024"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <table class="table table-lg table-bordered">
+                                                        <thead class="bg-secondary text-black">
+                                                            <style>
+                                                                .text-center {
+                                                                    text-align: center;
+                                                                }
+                                                            </style>
+                                                            <tr class="bg-light">
+                                                                <th class="text-center">Kondisi Akhir</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><input type="text" class="form-control" placeholder="Masukkan Target 2025" name="target_tahun_2025"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <table class="table table-lg table-bordered">
+                                                        <thead class="bg-secondary text-black">
+                                                            <style>
+                                                                .text-center {
+                                                                    text-align: center;
+                                                                }
+                                                            </style>
+                                                            <tr class="bg-light">
+                                                                <th class="text-center">Kondisi Akhir</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><input type="text" class="form-control" placeholder="Masukkan Target Akhir" name="target_kondisi_akhir"></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>                                                             
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal fade" id="hapusIndikator" tabindex="-1" role="dialog" aria-labelledby="hapusIndikatorModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="hapusTujuanModalLabel">Hapus Tujuan</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- Isi pesan konfirmasi penghapusan -->
+                                        <p>Anda yakin ingin menghapus tujuan ini?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                        <!-- Tombol konfirmasi penghapusan -->
+                                        <form action="/hapus-indikator" method="POST" enctype="multipart/form-data">
+                                            @method('DELETE') <!-- Menggunakan DELETE method untuk menghapus data -->
+                                            @csrf
+                                            <button type="submit" class="btn btn-danger" id="konfirmasiHapusTujuan">Hapus</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </td>
+            </tr>
     <!-- Footer -->
     @include('layouts.footer')
     <!-- End of Footer -->

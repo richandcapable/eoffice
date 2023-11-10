@@ -140,11 +140,12 @@
                                                     @foreach($sasaran as $item)
                                                     <tr>
                                                         <td>{{$loop->iteration}}</td>
-                                                        <td>{{ $item->kode }}</td>
+                                                        <td>-</td>
                                                         <td>{{ $item->nama_sasaran }}</td>                                                  
                                                         <td>
+                                                            <a href="detailsasaran">
                                                             <button class="btn btn-primary btn-sm">
-                                                                <i class="far fa-eye"></i> Detail
+                                                                <i class="far fa-eye"></i> Detail   
                                                             </button>
                                                             @endforeach
                                                         </td>
